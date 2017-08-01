@@ -2,6 +2,7 @@ package SituatieScolara.SituatieScolara;
 
 import java.util.List;
 
+
 //aceasta clasa calculeaza si furnizeaza media generala
 //pe baza a doua situatii semestriale furnizate
 public class SituatieGenerala {
@@ -25,7 +26,7 @@ public class SituatieGenerala {
 		k=0;
 		for(Disciplina i:disciplineSem2)
 		{
-			mediiAnuale[k]=(mediiAnuale[k]+i.getMedia())/2;
+			mediiAnuale[k]=((float)(mediiAnuale[k]+i.getMedia()))/2;
 		}
 		
 		//calculam media generala
@@ -34,7 +35,7 @@ public class SituatieGenerala {
 		{
 			suma+=mediiAnuale[i];
 		}
-		mediaGenerala=suma/mediiAnuale.length;
+		mediaGenerala=(float)(Math.floor(suma/mediiAnuale.length)*100/100);
 	}
 
 	public float getMediaGenerala() {

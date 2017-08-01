@@ -80,6 +80,8 @@ public class GenereazaSituatie {
 		{
 			for(int i=1;i<=nrElevi;i++)
 			{
+				list1.clear();
+				list2.clear();
 				numeElev=fin1.nextLine();
 				fin2.nextLine();//sar peste numele elevului in fisierul pt sem2
 				

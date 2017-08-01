@@ -10,7 +10,7 @@ public class Disciplina {
 	private int teza=0;
 	private String absNemot[];
 	private String absMot[];
-	private float media=0;
+	private int media=0;
 		
 	
 	public Disciplina(String nume,int nrOre,int []note,
@@ -31,11 +31,15 @@ public class Disciplina {
 		this.absNemot=Arrays.copyOf(absNemot,absNemot.length);
 		
 		int suma=0;
+		for(int i:note)
+			suma+=i;
 		if(teza==0)
 		{
-			for(int i:note)
-				suma+=i;
-			media=((float)suma)/note.length;
+			media=Math.round(((float)suma)/note.length);
+		}
+		else 
+		{
+			media=Math.round(((((float)suma)/note.length)*3+teza)/4);
 		}
 	}
 
@@ -76,7 +80,7 @@ public class Disciplina {
 
 	
 
-	public float getMedia() {
+	public int getMedia() {
 		return media;
 	}
 

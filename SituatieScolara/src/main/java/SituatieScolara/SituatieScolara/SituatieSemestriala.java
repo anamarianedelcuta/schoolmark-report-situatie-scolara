@@ -36,7 +36,7 @@ public class SituatieSemestriala {
 		{
 			suma+=i.getMedia();
 		}
-		mediaSemestriala=(suma+(float)mediaPurtare)/(discipline.size()+1);
+		mediaSemestriala=(float)(Math.floor(((float)(suma+mediaPurtare))/(discipline.size()+1)*100)/100);
 	}
 
 	public int getMediaPurtare() {
