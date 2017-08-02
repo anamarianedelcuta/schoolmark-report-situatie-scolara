@@ -1,5 +1,6 @@
 package SituatieScolara.SituatieScolara;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -17,17 +18,21 @@ public class SituatieGenerala {
 		
 		int k=0;
 		mediiAnuale=new float[disciplineSem1.size()];
+		Arrays.fill(mediiAnuale, 0);
+		
 		
 		for(Disciplina i:disciplineSem1)
 		{
-			mediiAnuale[k++]=i.getMedia();
+			mediiAnuale[k++]=i.getMedia(); 
 		}
+		//System.out.println("medii sme1 "+Arrays.toString(mediiAnuale));
 		
 		k=0;
 		for(Disciplina i:disciplineSem2)
 		{
-			mediiAnuale[k]=((float)(mediiAnuale[k]+i.getMedia()))/2;
+			mediiAnuale[k]=((float)(mediiAnuale[k++]+i.getMedia()))/2;
 		}
+		//System.out.println("medii sme1+2 "+Arrays.toString(mediiAnuale));
 		
 		//calculam media generala
 		float suma=0;
@@ -35,7 +40,8 @@ public class SituatieGenerala {
 		{
 			suma+=mediiAnuale[i];
 		}
-		mediaGenerala=(float)(Math.floor(suma/mediiAnuale.length)*100/100);
+		suma+=((float)(sem1.getMediaPurtare()+sem2.getMediaPurtare()))/2;
+		mediaGenerala=(float)(Math.floor(suma/(mediiAnuale.length+1)*100)/100);
 	}
 
 	public float getMediaGenerala() {

@@ -19,7 +19,7 @@ public class GenereazaSituatie {
 		
 		scrieHTMLSemestrial(new File("FisiereIesire/SituatieSem1.html"));
 		scrieHTMLSemestrial(new File("FisiereIesire/SituatieSem2.html"));
-		/*scrieHTMLGeneral(new File("FisiereIesire/SituatieGenerala.html"));*/
+		scrieHTMLGeneral(new File("FisiereIesire/SituatieGenerala.html"));
 		
 	}
 
@@ -361,10 +361,115 @@ public class GenereazaSituatie {
 		
 		try{
 			f.createNewFile();
+			PrintWriter fout=new PrintWriter(f);
+			
+			fout.println("<html>");
+			fout.println("	<head><title>Situatie Generala</title></head>");
+			fout.println("	<body bgcolor=grey>");
+			fout.println("		<center><h1>SITUATIE ANUALA</h1></center>");
+			fout.println("		<br><br><br>");
+			
+			
+			//parcurgen lista de elevi si pentru fiecare in parte vom afisa informatiile
+			//din situatia anuala
+			for(Elev elev:elevi)
+			{
+				SituatieGenerala sg;
+				SituatieSemestriala ss1;
+				SituatieSemestriala ss2;
+				
+				
+				sg=elev.getGeneral();
+				ss1=elev.getSem1();
+				ss2=elev.getSem2();
+				
+				fout.println("<b>"+elev.getNume().toUpperCase()+
+						":	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MEDIA GENERALA: "+
+						sg.getMediaGenerala()+"</b>");
+				fout.println("		<table border=2 bgcolor=white>");
+				//antetul tabelului
+				fout.println("			<tr>");
+					
+					fout.print("				<td>");
+					fout.print("Nr.Crt.");	
+					fout.println("</td>");
+					
+					fout.print("				<td>");
+					fout.print("Disciplina");	
+					fout.println("</td>");
+					
+										
+					fout.print("				<td>");
+					fout.print("Medie smestrul I");	
+					fout.println("</td>");
+					
+					fout.print("				<td>");
+					fout.print("Medie smestrul II");	
+					fout.println("</td>");
+					
+					fout.print("				<td>");
+					fout.print("Medie Anuala");	
+					fout.println("</td>");
+				
+				fout.println("			</tr>");
+				
+				
+				
+				
+				//pentru fiecare disciplina afisam cate o linie de tabel
+				int k=1;
+				for(int j=0;j<ss1.getDiscipline().size();j++)
+				{
+					Disciplina disciplina1=ss1.getDiscipline().get(j);
+					Disciplina disciplina2=ss2.getDiscipline().get(j);
+				fout.println("			<tr>");
+					
+					fout.print("				<td width=5%>");
+					fout.print(k++);	
+					fout.println("</td>");
+					
+					//numele disciplinei
+					fout.print("				<td width=20%>");
+					fout.print(disciplina1.getNume().toUpperCase());	//System.out.print(disciplina1.getNume().toUpperCase()+" ");
+					fout.println("</td>");
+					
+					//media pe sem I la disciplina curenta
+					fout.print("				<td width=25%>");
+					fout.print(disciplina1.getMedia());	//System.out.print(disciplina1.getMedia()+" ");
+					fout.println("</td>");
+					
+					//media pe sem II la disciplina curenta
+					fout.print("				<td width=25%>");
+					fout.print(disciplina2.getMedia());	//System.out.print(disciplina2.getMedia()+" ");
+					fout.println("</td>");
+					
+					//media anuala la disciplina curenta
+					fout.print("				<td width=5%>");
+					fout.print(sg.getMediiAnuale()[j]);	//System.out.print(sg.getMediiAnuale()[j]);
+					fout.println("</td>");
+				
+				fout.println("			</tr>");
+				}
+				fout.println("			<tr>");
+				fout.print("				<td>"+k+"</td>");
+				fout.print("				<td >PURTARE</td>");
+				fout.print("				<td>"+ss1.getMediaPurtare()+"</td>");
+				fout.print("				<td>"+ss2.getMediaPurtare()+"</td>");
+				fout.print("				<td>"+((float)(ss1.getMediaPurtare()+ss2.getMediaPurtare()))/2+"</td>");
+				fout.println("			</tr>");
+				fout.println("		</table>");
+				fout.println("<br>");
+			}
+			
+
+			fout.println("	</body>");
+			fout.println("</html>");
+			fout.close();
+			fout.close();
 		}
 		catch(IOException e)
 		{
-			
+			System.out.print("nu s-a creat fisierul");
 		}
 	}
 }
